@@ -257,7 +257,7 @@ const Navbar = () => {
         direction={{ base: "column-reverse", md: "row" }}
         justify={{ base: "center", md: "space-between" }}
         align="center"
-        height={{ base: "15rem", md: "4rem" }}
+        height={{ base: "18rem", md: "4rem" }}
         gap="3rem"
         boxShadow="rgba(149, 157, 165, 0.2) 0px 8px 24px"
         px="2"

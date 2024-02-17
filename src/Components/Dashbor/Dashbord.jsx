@@ -22,6 +22,8 @@ const Dashbord = () => {
   const [topplayer, setTopPlayer] = useState([]);
   const [ActiveUser, setActiveUser] = useState([]);
   const [TotleRevenue, setTotleRevenue] = useState();
+  const [ credit , setCredit] = useState();
+  const [ debit , setDebit] = useState();
 
   const [search, setSearch] = useState();
   const [filterData, setFilterData] = useState();
@@ -42,8 +44,9 @@ const Dashbord = () => {
         url: `${apiUrl}/user/get_revenue`,
       };
       const response = await axios(config);
-      // console.log(response,'Totle revenue');
-      setTotleRevenue(response?.data?.totalRevenue);
+      console.log(response,'Totle revenue');
+      setCredit(response.data.credit);
+      setDebit(response.data.debit)
     } catch (err) {
       console.error(err);
     }
@@ -180,10 +183,24 @@ const Dashbord = () => {
             bg='green'
             borderRadius="10px"
           >
-            <Text fontWeight="bold" color='white'>+{TotleRevenue}</Text>
+            <Text fontWeight="bold" color='white'>+{credit}</Text>
             <Text color="white" fontWeight="500">
-              Total Revenue
+              Total Credit
             </Text>
+            </Box>
+            <Box
+            boxShadow="rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px"
+            p="0.5rem"
+            width={["100%", "30%"]}
+            textAlign="center"
+            bg='red'
+            borderRadius="10px"
+          >
+            <Text fontWeight="bold" color='white'>- {debit}</Text>
+            <Text color="white" fontWeight="500">
+              Total debit
+            </Text>
+
           </Box>
         </Flex>
 
