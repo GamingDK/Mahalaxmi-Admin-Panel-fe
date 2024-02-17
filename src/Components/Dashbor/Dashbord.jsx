@@ -187,6 +187,37 @@ const Dashbord = () => {
           </Box>
         </Flex>
 
+       
+
+  {/* Top Player */}
+
+  <Box mt="1rem">
+          <Text fontSize="2rem" fontWeight="bold">
+            Top Players
+          </Text>
+          <Text fontSize="sm" fontWeight="500" mb="2">
+            Accept the Challenge
+          </Text>
+        </Box>
+        <DataTable
+          columns={columnsAllPlayer}
+          data={filterData}
+          pagination
+          fixedHeader
+          selectableRows
+          highlightOnHover
+          subHeader
+          subHeaderComponent={
+            <Input
+              type="text"
+              placeholder="Search...."
+              w="30%"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          }
+        />
+      </Box>
         {/* Table For Treding Player */}
         <Box mt="1rem">
           <Text fontSize="2rem" fontWeight="bold">
@@ -223,35 +254,7 @@ const Dashbord = () => {
           </Tbody>
         </Table>
 
-        {/* Top Player */}
-
-        <Box mt="1rem">
-          <Text fontSize="2rem" fontWeight="bold">
-            Top Players
-          </Text>
-          <Text fontSize="sm" fontWeight="500" mb="2">
-            Accept the Challenge
-          </Text>
-        </Box>
-        <DataTable
-          columns={columnsAllPlayer}
-          data={filterData}
-          pagination
-          fixedHeader
-          selectableRows
-          highlightOnHover
-          subHeader
-          subHeaderComponent={
-            <Input
-              type="text"
-              placeholder="Search...."
-              w="30%"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          }
-        />
-      </Box>
+      
     </>
   );
 };

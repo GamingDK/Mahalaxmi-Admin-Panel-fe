@@ -6,6 +6,7 @@ import {
   useMediaQuery,
   Link,
   Image,
+  Input
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
@@ -45,53 +46,67 @@ const AdminLogin = () => {
   };
   return (
     <>
-      <Box width={["70%"]}>
+      <Box
+        width="100vw"
+        h="100vh"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+      >
         <Box
           backgroundColor="grey"
-          width={isLargerThan1250 ? "1150px" : "100%"}
-          height={isLargerThan1250 ? "550px" : "100%"}
-          position="relative"
+          width={{ base: "95vw", md: "100%" }}
+          h="90vh"
+          // position="relative"
           borderRadius="10px"
-          top={42}
-          left={55}
+          // top={42}
+          // left={55}
           boxShadow="45px 45px 45px rgba(2, 4, 20, 0.3)"
+          display="flex"
+          flexDirection={{ base: "column", md: "row" }}
+          justifyContent="center"
+          alignItems="center"
+          gap="3"
         >
           <Image
-            src={Picture} 
+            src={Picture}
             alt="m"
-            width={["70%", "38%"]}
-            style={{
-              borderRadius: "10px",
-              position: "relative",
-              top: "10%",
-              left: "10%",
-            }}
+            boxSize={{ base: "35%", md: "405" }}
+            borderRadius="md"
+            my="1"
           />
 
           <Box
             as="form"
             bg="white"
-            p={{base:8,md:3}}
+            p={{ base: 3, md: 1 }}
             borderRadius="md"
             boxShadow="md"
-            maxW={{base:"400px",md:"400px"}}
-            mx="auto"
-            height={{base:"380px",md:"470px"}}
+            // maxW={{base:"300px",md:"400px"}}
+            width={["20rem", "35%"]}
+            // mx="auto"
+            height={{ base: "380px", md: "405px" }}
             display="flex"
             flexDirection="column"
-            justifyContent="space-between"
+            justifyContent="flex-start"
+            alignItems="center"
             position="relative"
-            left="10%"
-            bottom="70%"
+            // left="5%"
+            // bottom="70%"
+            // ml="1rem"
+            my="1"
           >
-            <img
-              style={{
-                width: "70%",
-                height: "100%",
-                position: "relative",
-                bottom: "15%",
-                left: "15%",
-              }}
+            <Image
+              width={{ base: "40%", md: "40%" }}
+              // style={{
+              //   height: "100%",
+              //   position: "relative",
+              //   bottom: "15%",
+              //   left: "15%",
+              // }}
+              p="0"
+              m="0"
+              // bg="blue"
               src={king}
               alt=""
             />
@@ -100,14 +115,14 @@ const AdminLogin = () => {
               fontWeight="bold"
               fontStyle="italic"
               position="relative"
-              fontSize={{base:"1.7rem",md:"2.5rem"}}
-              bottom={{base:"5rem",md:"9rem"}}
-              // textAlign="center"
-              left={{base:"10" , md:"20"}}
+              fontSize={{ base: "1.7rem", md: "2.5rem" }}
+              // bottom={{base:"5rem",md:"9rem"}}
+              textAlign="center"
+              // left={{base:"10" , md:"20"}}
             >
               Mahalaxmi
             </Text>
-            <Text
+            {/* <Text
               color={"black"}
               fontWeight="bold"
               position="relative"
@@ -115,30 +130,36 @@ const AdminLogin = () => {
               fontSize={{base:"1.5em" , md:"1.8em"}}
             >
               Admin Login
-            </Text>
-            <Box position="relative" bottom={{base:"4em", md:"8em"}}>
-              <input
+            </Text> */}
+            <Box
+              display="flex"
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Input
                 type="text"
                 placeholder="Admin Mobile Number"
                 value={adminID}
                 onChange={(e) => setAdminID(e.target.value)}
                 style={{
-                  padding: "3px 6px",
-                  marginBottom: "16px",
+                  // padding: "3px 6px",
+                  // marginBottom: "16px",
                   borderRadius: "4px",
                   borderColor: "gray",
                   border: "none",
                   borderBottom: "1px solid gray",
                   borderWidth: "1px",
-                  width: "100%",
+                  width: "80%",
                   boxSizing: "border-box",
                 }}
               />
 
-              <input
+              <Input
                 type="text"
                 placeholder="Admin Password"
                 value={adminPassword}
+                mt="2"
                 onChange={(e) => setAdminPassword(e.target.value)}
                 style={{
                   padding: "3px 6px",
@@ -148,7 +169,7 @@ const AdminLogin = () => {
                   borderColor: "gray",
                   borderBottom: "1px solid gray",
                   borderWidth: "1px",
-                  width: "100%",
+                  width: "80%",
                   boxSizing: "border-box",
                 }}
               />
@@ -158,10 +179,10 @@ const AdminLogin = () => {
               <Button
                 backgroundImage="linear-gradient(to top, #FFBB64, #E8C872)"
                 padding="5px 10px"
-                width={["13.5rem", "20rem"]}
+                width={["5rem","7rem", "15rem"]}
                 fontWeight="bold"
                 mt="0.7rem"
-                ml={{base:"0rem" , md:"1.5rem"}}
+                ml={{ base: "0rem", md: "1.5rem" }}
                 onClick={handleLogin}
                 fontSize="1.2rem"
               >
