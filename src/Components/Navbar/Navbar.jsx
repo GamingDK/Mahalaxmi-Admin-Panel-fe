@@ -66,7 +66,8 @@ const Navbar = () => {
     },
   ];
 
-  const getAvailableCoins = async () => {
+  async function getAvailableCoins() {
+    console.log("called ");
     try {
       const response = await fetch(`${apiUrl}/admin/getAvailableCoins`);
       const result = await response.json();
@@ -110,11 +111,13 @@ const Navbar = () => {
       const response = await axios(config);
       setMobileNumbers(response?.data);
       setRequestedAmount(response?.data);
+     
       if(response === 200){
+       
         toast({
           title: 'Recharge Successful!',
           status: 'success',
-          duration: 9000,
+          duration: 3000,
           isClosable: true,
         })
       }
@@ -122,11 +125,13 @@ const Navbar = () => {
     } catch (err) {
       console.log(err);
     }
+    getAvailableCoins();
   };
+
   useEffect(() => {
     ShowWithdrolData();
     getAvailableCoins();
-  }, [setBalance, getAvailableCoins]);
+  }, [setBalance,setAvailableCoins]);
 
   const ShowWithdrolData = async () => {
     try {

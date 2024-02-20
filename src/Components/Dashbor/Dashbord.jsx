@@ -77,33 +77,6 @@ const Dashbord = () => {
   //  }
   ];
 
-  // Add coin Function
-  // https//:localhost:5000/userMaster/recharge
-  // const handleClick = async(mobileNumber , balance)=>{
-  //   try{
-  //     const payload = {
-  //       mobileNumber : mobileNumber,
-  //       coin : balance
-  //     }
-
-  //     const config ={
-  //       method : "POST",
-  //       url :  `${apiUrl}/userMaster/recharge`,
-  //       data : payload
-  //     }
-
-  //     const response = await axios(config);
-  //     if(response.status === 200){
-  //       alert("Money Send Successfully")
-  //     }
-
-  //     console.log(response,"responce");
-
-  //   }
-  //   catch(err){
-  //     console.log(err);
-  //   }
-  // }
 
   const TredingGames = async () => {
     try {
