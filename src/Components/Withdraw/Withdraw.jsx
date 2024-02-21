@@ -28,6 +28,7 @@ function Withdraw() {
     const [mobileNumbers, setMobileNumbers] = useState("");
     const [requestedAmount, setRequestedAmount] = useState("");
     const [coins, setCoins] = useState();
+    const [toggle, setToggle] = useState(true)
 
     const handleClick = async (mobileNumber, requestedAmount) => {
       
@@ -46,10 +47,11 @@ function Withdraw() {
           const response = await axios(config);
           setMobileNumbers(response?.data);
           setRequestedAmount(response?.data);
-          window.location.reload(); 
+        //   setAllWithdrolData([])
+        setToggle(!toggle)
           if(response){
             toast({
-              title: 'Recharge Successful!',
+              title: 'Accepted Successfully',
               status: 'success',
               duration: 3000,
               isClosable: true,
@@ -95,26 +97,37 @@ function Withdraw() {
 
 
 
-    const ShowWithdrolData = async () => {
-        console.log("called")
+      const ShowWithdrolData = async () => {
+        console.log("called");
         try {
           const config = {
             method: "GET",
             url: `${apiUrl}/admin/getWithDrawAmountRequests`,
           };
-    
+      
           const response = await axios(config);
-          console.log(response, "Withdroldata");
-          setAllWithdrolData(response?.data?.userMasters);
-          // setMobileNumbers(response?.data?.userMasters?.mobileNumber)
+          console.log(response, "WithdrawalData");
+      
+          // Check if the response status is OK (200)
+          if (response.status === 200) {
+            // Update the state with the withdrawal data
+            setAllWithdrolData(response.data.userMasters);
+          } else {
+            // Handle non-OK response status
+            console.log("Error: Non-OK response status", response.status);
+          }
         } catch (err) {
-          console.log(err);
+          // Handle errors
+          console.log("Error:", err);
         }
       };
+      
 
       useEffect(()=>{
         ShowWithdrolData();
-      },[setAllWithdrolData])
+      },[toggle])
+
+
   return (
     <Box mt="4">
         <Text fontWeight="Bold" fontSize="30" color="red.500">Withdrawal Requests</Text>
