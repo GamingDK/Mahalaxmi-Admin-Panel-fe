@@ -67,7 +67,6 @@ const Navbar = () => {
   ];
 
   async function getAvailableCoins() {
-    console.log("called ");
     try {
       const response = await fetch(`${apiUrl}/admin/getAvailableCoins`);
       const result = await response.json();
@@ -94,42 +93,9 @@ const Navbar = () => {
  }
 
 
-  const handleClick = async (mobileNumber, requestedAmount) => {
-    console.log(mobileNumber, coins, "Valkkue");
-    try {
-      const payload = {
-        mobileNumber: mobileNumber,
-        requestedAmount: requestedAmount,
-      };
-
-      const config = {
-        method: "POST",
-        url: `${apiUrl}/admin/acceptRequestAndTransferAmount`,
-        data: payload,
-      };
-
-      const response = await axios(config);
-      setMobileNumbers(response?.data);
-      setRequestedAmount(response?.data);
-     
-      if(response === 200){
-       
-        toast({
-          title: 'Recharge Successful!',
-          status: 'success',
-          duration: 3000,
-          isClosable: true,
-        })
-      }
-      console.log(response, "handleClick");
-    } catch (err) {
-      console.log(err);
-    }
-    getAvailableCoins();
-  };
-
+ 
   useEffect(() => {
-    ShowWithdrolData();
+    // ShowWithdrolData();
     getAvailableCoins();
   }, [setBalance,setAvailableCoins]);
 
@@ -292,7 +258,7 @@ const Navbar = () => {
               + Add Coin
             </Button>
           </Tooltip>
-
+{/* 
           <Tooltip
             label="See all withdraw requests"
             hasArrow
@@ -308,7 +274,7 @@ const Navbar = () => {
             >
               - Withdraw
             </Button>
-          </Tooltip>
+          </Tooltip> */}
 
           <Tooltip
             label="Add Daily balance"
