@@ -13,6 +13,7 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
+import Withdraw from "../Withdraw/Withdraw";
 
 const apiUrl = import.meta.env.VITE_APP_API_URL;
 const Dashbord = () => {
@@ -22,11 +23,15 @@ const Dashbord = () => {
   const [topplayer, setTopPlayer] = useState([]);
   const [ActiveUser, setActiveUser] = useState([]);
   const [TotleRevenue, setTotleRevenue] = useState();
+  const [ credit , setCredit] = useState();
+  const [ debit , setDebit] = useState();
 
   const [search, setSearch] = useState();
   const [filterData, setFilterData] = useState();
 
   const [open , setOpen ] = useState(false);
+ 
+
 
   useEffect(() => {
     TredingGames();
@@ -42,8 +47,9 @@ const Dashbord = () => {
         url: `${apiUrl}/user/get_revenue`,
       };
       const response = await axios(config);
-      // console.log(response,'Totle revenue');
-      setTotleRevenue(response?.data?.totalRevenue);
+      console.log(response,'Totle revenue');
+      setCredit(response.data.credit);
+      setDebit(response.data.debit)
     } catch (err) {
       console.error(err);
     }
@@ -74,33 +80,6 @@ const Dashbord = () => {
   //  }
   ];
 
-  // Add coin Function
-  // https//:localhost:5000/userMaster/recharge
-  // const handleClick = async(mobileNumber , balance)=>{
-  //   try{
-  //     const payload = {
-  //       mobileNumber : mobileNumber,
-  //       coin : balance
-  //     }
-
-  //     const config ={
-  //       method : "POST",
-  //       url :  `${apiUrl}/userMaster/recharge`,
-  //       data : payload
-  //     }
-
-  //     const response = await axios(config);
-  //     if(response.status === 200){
-  //       alert("Money Send Successfully")
-  //     }
-
-  //     console.log(response,"responce");
-
-  //   }
-  //   catch(err){
-  //     console.log(err);
-  //   }
-  // }
 
   const TredingGames = async () => {
     try {
@@ -177,52 +156,35 @@ const Dashbord = () => {
             p="0.5rem"
             width={["100%", "30%"]}
             textAlign="center"
-            bg='green'
+            bg="green"
             borderRadius="10px"
           >
-            <Text fontWeight="bold" color='white'>+{TotleRevenue}</Text>
+            <Text fontWeight="bold" color="white">
+              +{credit}
+            </Text>
             <Text color="white" fontWeight="500">
-              Total Revenue
+              Total Credit
+            </Text>
+          </Box>
+          <Box
+            boxShadow="rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px"
+            p="0.5rem"
+            width={["100%", "30%"]}
+            textAlign="center"
+            bg="red"
+            borderRadius="10px"
+          >
+            <Text fontWeight="bold" color="white">
+              - {debit}
+            </Text>
+            <Text color="white" fontWeight="500">
+              Total debit
             </Text>
           </Box>
         </Flex>
 
-        {/* Table For Treding Player */}
-        <Box mt="1rem">
-          <Text fontSize="2rem" fontWeight="bold">
-            Trending games
-          </Text>
-          <Text fontSize="sm" fontWeight="500" mb="2">
-            Accept the Challenge
-          </Text>
-        </Box>
-        {/* Table */}
-        <Table
-          variant="striped"
-          width="100%"
-          borderWidth="1px"
-          borderRadius="md"
-        >
-          <Tbody>
-            {data &&
-              data?.map((TrendingGame) => {
-                const { game, totalRevenue } = TrendingGame;
-                return (
-                  <Tr key={game?._id}>
-                    <Td>
-                      <Avatar src="https://store-images.s-microsoft.com/image/apps.17247.13552113910340840.b3fbbc98-4d8c-47a1-902e-7532f8d4de3e.288a680d-b29e-40fe-8a32-18ff634cbd50?mode=scale&q=90&h=1080&w=1920" />
-                    </Td>
 
-                    <Td fontWeight="500">{game}</Td>
-                    <Td fontWeight="500" color="green">
-                      {totalRevenue}
-                    </Td>
-                  </Tr>
-                );
-              })}
-          </Tbody>
-        </Table>
-
+<Withdraw/>
         {/* Top Player */}
 
         <Box mt="1rem">
@@ -252,6 +214,36 @@ const Dashbord = () => {
           }
         />
       </Box>
+      {/* Table For Treding Player */}
+      <Box mt="1rem">
+        <Text fontSize="2rem" fontWeight="bold">
+          Trending games
+        </Text>
+        <Text fontSize="sm" fontWeight="500" mb="2">
+          Accept the Challenge
+        </Text>
+      </Box>
+      {/* Table */}
+      <Table variant="striped" width="100%" borderWidth="1px" borderRadius="md">
+        <Tbody>
+          {data &&
+            data?.map((TrendingGame) => {
+              const { game, totalRevenue } = TrendingGame;
+              return (
+                <Tr key={game?._id}>
+                  <Td>
+                    <Avatar src="https://store-images.s-microsoft.com/image/apps.17247.13552113910340840.b3fbbc98-4d8c-47a1-902e-7532f8d4de3e.288a680d-b29e-40fe-8a32-18ff634cbd50?mode=scale&q=90&h=1080&w=1920" />
+                  </Td>
+
+                  <Td fontWeight="500">{game}</Td>
+                  <Td fontWeight="500" color="green">
+                    {totalRevenue}
+                  </Td>
+                </Tr>
+              );
+            })}
+        </Tbody>
+      </Table>
     </>
   );
 };
