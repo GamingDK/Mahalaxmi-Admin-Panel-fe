@@ -73,6 +73,7 @@ function Withdraw() {
         },
         {
           name: "UPI ID",
+          minWidth:"300px",
           selector: (row) => row.upiId,
         },
         {
