@@ -63,6 +63,40 @@ function Withdraw() {
         }
        
       };
+
+      const handleCancel = async (mobileNumber, requestedAmount) => {
+      
+        try {
+          const payload = {
+            mobileNumber: mobileNumber,
+            requestedAmount: requestedAmount,
+          };
+    
+          const config = {
+            method: "POST",
+            url: `${apiUrl}/admin/cancelRequestAndCreditCoins`,
+            data: payload,
+          };
+    
+          const response = await axios(config);
+          setMobileNumbers(response?.data);
+          setRequestedAmount(response?.data);
+        //   setAllWithdrolData([])
+        setToggle(!toggle)
+          if(response){
+            toast({
+              title: 'Request Cancelled',
+              status: 'success',
+              duration: 3000,
+              isClosable: true,
+            })
+          }
+          console.log(response, "handleCancel");
+        } catch (err) {
+          alert(err);
+        }
+       
+      };
     
 
 
@@ -92,6 +126,21 @@ function Withdraw() {
             >
               Accept
             </Button>
+            
+          ),
+        },
+        {
+          name: "Action",
+          cell: (row) => (
+            <Button
+              bg="red"
+              color="white"
+              _hover={{ bg: "#004225" }}
+              onClick={() => handleCancel(row.mobileNumber, row.requestedAmount)}
+            >
+              Cancel
+            </Button>
+            
           ),
         },
       ];
